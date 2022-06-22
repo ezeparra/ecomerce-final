@@ -8,6 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import logo from '../assets/logo.png'
 import { ShoppingCart } from '@material-ui/icons';
 import { Badge } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { useStateValue } from '../StateProvider';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,12 +21,13 @@ const useStyles = makeStyles((theme) => ({
   appBar:{
       backgroundColor: "whitesmoke",
       boxShadow:"none",
+     
   },
   grow: {
       flexGrow: 1,
   },
   buttom: {
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(2),
   },
   image:{
       marginRight:"10px",
@@ -34,14 +38,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
   const classes = useStyles();
+  const[{basket}, ] = useStateValue();
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
+          <Link to="/">
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <img src={logo} className={classes.image} alt= "logo"/>
           </IconButton>
+          </Link>
           <div className={classes.grow}></div>
           <Typography variant="h6" color='textPrimary' style={{marginRight: "15px"}}>
             Hello guest
@@ -50,11 +57,13 @@ export default function NavBar() {
               <Button variant = "outlined">
                 <strong>Sing In</strong>
               </Button>
+              <Link to="/checkout-page">
               <IconButton arial-label ="show cart items" color= "inherit" > 
-                    <Badge badgeContent={2} color="secondary">
+                    <Badge badgeContent={basket?.length} color="secondary">
                         <ShoppingCart fontSize="large" color='primary' />
                     </Badge>              
               </IconButton>
+              </Link>
           </div>
         </Toolbar>
       </AppBar>
