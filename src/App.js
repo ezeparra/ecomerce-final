@@ -5,32 +5,33 @@ import './App.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/Signup";
-import {useState } from "react";
-import {auth} from "./firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import {useEffect} from "react";
 import Checkout from "./components/CheckoutForm/Checkout";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { actionType } from "./reducer";
+import { useStateValue } from "./StateProvider";
 
 
 
 function App() {
 
-//  const[{user}, dispatch] = useStateValue();
+ const[{user}, dispatch] = useStateValue();
+ console.log(user);
 
-// useEffect(()=>{
-//   onAuthStateChanged((auth)=>{ 
-//     console.log(auth);
-//     if(auth)
-//     {dispatchEvent({
-//       type:actionType.SET_USER,
-//       user: auth,
-//     })}
-//   })
-// },[])
-const [user, setUser] = useState({});
 
-onAuthStateChanged(auth,(currentUser)=>{
-  setUser(currentUser);
-});
+useEffect(() => {
+  const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    {dispatch({
+            type:actionType.SET_USER,
+            user:uid,
+          })}    
+  }});
+}, [])
+
+
 
 
 
