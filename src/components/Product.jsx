@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Products from './Products';
 import product from '../product-data';
+import db from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,12 +17,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Product ()  {
   const classes = useStyles();
 const [productos,setProductos] = useState([])
-const task = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(product)
-  }, 2000);
+const task = new Promise( async (resolve, reject) => {
+  const productCollection = collection(db,"productos");
+  const querySnapshot = await getDocs(productCollection);
+  resolve(querySnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })))
 })
 useEffect(() => {
+  
+
  task.then(res => setProductos(res))
  .catch(error => console.log(error)) 
 }, [])
