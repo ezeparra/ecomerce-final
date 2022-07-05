@@ -16,8 +16,13 @@ const useStyles = makeStyles ((theme) => ({
 
 const CheckoutPage = () => {
     const classes = useStyles ();
-    const[{basket}, ] = useStateValue();
+    const[{basket}, dispatch] = useStateValue();
 
+    const getBasketTotal = () => {
+      return(basket?.reduce((amount, item) => amount = amount + item.price, 0)
+      )
+      
+  }
 
     function FormRow() {
         return(
@@ -46,7 +51,7 @@ const CheckoutPage = () => {
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
             <Typography align= 'center' gutterBottom variant='h4'>
-                <Total/>
+                <Total getBasketTotal={getBasketTotal}/>
             </Typography>
         </Grid>
       </Grid>

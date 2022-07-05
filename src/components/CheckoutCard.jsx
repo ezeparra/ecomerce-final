@@ -34,18 +34,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CheckoutCard  ({product}) {
   const classes = useStyles();
-  const[dispatch] = useStateValue();
-  // const [expanded, setExpanded] = React.useState(false);
+  const[{basket},dispatch] = useStateValue();
+  const [expanded, setExpanded] = React.useState(false);
   const {id, name, image, price, rating,} = product
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
+   const handleExpandClick = () => {
+     setExpanded(!expanded);
+   }
   console.log(product)
   const removeItem = () => dispatch({
     type: actionType.REMOVE_ITEM,
     id:id,
   })
-  
+  console.log (basket)
   
   return (
     <Card className={classes.root}>

@@ -19,7 +19,7 @@ const product = [
     },
     {
         id: 3,
-        name: "Nike Ques 4",
+        name: "Nike Air Force",
         productType: "running shoes",
         price: 45,
         rating: 4,
@@ -81,3 +81,5 @@ const product = [
 
 ];
 export default product
+
+

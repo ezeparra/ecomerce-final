@@ -28,7 +28,7 @@ console.log(productos)
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        {
+        { productos.length >0 ?
           productos?.map(product => {
             console.log(product)
             return (
@@ -36,7 +36,8 @@ console.log(productos)
                 <Products  product={product}/>
               </Grid>
             )
-            })  
+            }) :
+            <h2>loading...</h2>  
         }
         
       </Grid>
