@@ -7,7 +7,7 @@ Preview⚡️
 
 
 # Sobre el proyecto
-Single Page project para cursada de Fullstack Developer en Coderhouse, utilizando React en un e-commerce sobre proyecto personal. Duracion de cursada 4 meses.
+Single Page project para cursada de Front-End React en Coderhouse, utilizando React en un e-commerce sobre proyecto personal. Duracion de cursada 2 meses.
 
 #🛠️Main Knowledge & Skills
 
